@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Co dobrego w okolicy?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header class="header">
+        <h1 class="heading-1">Głodny?</h1>
+        <h2 class="heading-2">Coś znajdziemy...</h2>
+    </header>
+    
+
+    <form class="search" id="form">
+        <div class="form-group">
+            <input type="text" class="search__input" id="where" placeholder="Podaj miasto lub zlokalizuj się przyciskiem &rarr;">
+            <label for="where" class="search__label">Gdzie chcesz zjeść?</label>
+            <button class="btn search__btn"><i class="fas fa-compass"></i></button>
+        </div>
+    </form>
+    <div class="results" id="results"></div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+/* Variables */
+:root {
+    --color-grey-light: #999;
+    --color-grey-dark: #333;
+}
+
+/* General */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #018799;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    padding: 2rem;
+}
+
+/* Button general style */
+.btn {
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+
+/* Typography */
+.header {
+    text-align: center;
+    margin-bottom: 10rem;
+}
+
+.heading-1 {
+    font-size: 20rem;
+    font-weight: 100;
+    letter-spacing: 1rem;
+}
+
+.heading-2 {
+    font-size: 4rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* Search form */
+.form-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search {
+    position: relative;
+}
+
+.search__label {
+    font-size: 2rem;
+    font-weight: 300;
+    color: var( --color-grey-light);
+    position: absolute;
+    top: 50%;
+    left: 3rem;
+    transform: translateY(-50%);
+    transition: all .3s;
+}
+.search__input {
+    padding: 1rem 3rem;
+    font-family: inherit;
+    font-size: 2rem;
+    color: var( --color-grey-dark);
+    width: 50rem;
+    border-radius: 5px;
+    border: 1px solid var(--color-grey-dark);
+}
+
+.search__input:focus,
+.search__btn:focus {
+    outline: none;
+}
+
+.search__input:focus + .search__label {
+    transform: translateY(-210%);
+    color: #fff;
+}
+
+.search__input::placeholder {
+    opacity: 0;
+    color: var( --color-grey-light);
+    font-size: 2rem;
+    font-weight: 300;
+    transition: opacity .3s;
+}
+
+.search__input:focus.search__input::placeholder {
+    opacity: 1;
+}
+
+.search__btn {
+    margin-left: 2rem;
+    align-self: stretch;
+    font-size: 1.6rem;
+    padding: 0 1.6rem;
+    background-color: #cbf50f;
+    border: 1px solid var(--color-grey-dark);
+    transition: background-color .2s;
+}
+
+.search__btn:hover {
+    background-color: #b0d800;
+}
+
