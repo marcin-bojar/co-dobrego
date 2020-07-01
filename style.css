@@ -21,7 +21,7 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    background-color: #018799;
+    background-color: #23646d;
     color: #fff;
     font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
@@ -45,7 +45,7 @@ body {
     font-size: 20rem;
     font-weight: 100;
     letter-spacing: 1rem;
-    text-shadow: 5px 2px 0 rgb(255, 123, 0), 10px 4px 0#000, 15px 6px 0 #b0d800, 20px 8px 0 #cf0f0f, 25px 10px 0 #f81eff;
+    /* text-shadow: 5px 2px 0 #ff7b00, 10px 4px 0 #a6a804, 15px 6px 0 #b0d800, 20px 8px 0 #cf0f0f, 25px 10px 0 #f81eff; */
 }
 
 .heading-2 {
