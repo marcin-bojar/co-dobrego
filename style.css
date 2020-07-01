@@ -24,6 +24,7 @@ body {
     background-color: #018799;
     color: #fff;
     font-family: 'Roboto', sans-serif;
+    font-size: 1.6rem;
     padding: 2rem;
 }
 
@@ -44,6 +45,7 @@ body {
     font-size: 20rem;
     font-weight: 100;
     letter-spacing: 1rem;
+    text-shadow: 5px 2px 0 rgb(255, 123, 0), 10px 4px 0#000, 15px 6px 0 #b0d800, 20px 8px 0 #cf0f0f, 25px 10px 0 #f81eff;
 }
 
 .heading-2 {
@@ -67,6 +69,7 @@ body {
     font-size: 2rem;
     font-weight: 300;
     color: var( --color-grey-light);
+    cursor: text;
     position: absolute;
     top: 50%;
     left: 3rem;
@@ -78,7 +81,8 @@ body {
     font-family: inherit;
     font-size: 2rem;
     color: var( --color-grey-dark);
-    width: 50rem;
+    width: 75vw;
+    max-width: 60rem;
     border-radius: 5px;
     border: 1px solid var(--color-grey-dark);
 }
@@ -108,7 +112,7 @@ body {
 .search__btn {
     margin-left: 2rem;
     align-self: stretch;
-    font-size: 1.6rem;
+    font-size: 2.2rem;
     padding: 0 1.6rem;
     background-color: #cbf50f;
     border: 1px solid var(--color-grey-dark);
@@ -118,4 +122,3 @@ body {
 .search__btn:hover {
     background-color: #b0d800;
 }
-
