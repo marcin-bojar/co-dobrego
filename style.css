@@ -21,7 +21,11 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    background-color: #23646d;
+    background-image: linear-gradient(rgba(0,0,0, .6), rgba(0,0,0, .6)), url(./vendors/img/bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    /* background-color: #23646d; */
     color: #fff;
     font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
@@ -43,9 +47,12 @@ body {
 
 .heading-1 {
     font-size: 20rem;
-    font-weight: 100;
+    font-weight: 300;
     letter-spacing: 1rem;
-    /* text-shadow: 5px 2px 0 #ff7b00, 10px 4px 0 #a6a804, 15px 6px 0 #b0d800, 20px 8px 0 #cf0f0f, 25px 10px 0 #f81eff; */
+    font-family: 'Bangers', cursive;
+    text-transform: uppercase;
+    color: #e14bff;
+    text-shadow: 9px 2px 0 #e4610a;
 }
 
 .heading-2 {
@@ -80,7 +87,6 @@ body {
     padding: 1rem 3rem;
     font-family: inherit;
     font-size: 2rem;
-    color: var( --color-grey-dark);
     width: 75vw;
     max-width: 60rem;
     border-radius: 5px;
@@ -114,11 +120,29 @@ body {
     align-self: stretch;
     font-size: 2.2rem;
     padding: 0 1.6rem;
-    background-color: #cbf50f;
+    background-color: #e14bff;
     border: 1px solid var(--color-grey-dark);
     transition: background-color .2s;
 }
 
 .search__btn:hover {
-    background-color: #b0d800;
+    background-color: #c73de2;
+}
+
+.results {
+    display: grid;
+    width: 80%;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    margin-top: 5rem;
+}
+
+.results__restaurant {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 5rem 2rem 5rem;
+    margin: 3rem;
+    border: 2px solid #fff;
+    border-radius: 7px;
 }
