@@ -209,3 +209,33 @@ body {
     font-size: 1.3rem;
     margin-top: auto;
 }
+
+.fas.fa-compass.rotate {
+    animation: compassRotate 2s infinite;
+}
+
+@keyframes compassRotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    20% {
+        transform: rotate(115deg);
+    }
+
+    45% {
+        transform: rotate(65deg);
+    }
+
+    60% {
+        transform: rotate(225deg);
+    }
+
+    85% {
+        transform: rotate(150deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

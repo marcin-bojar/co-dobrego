@@ -9,6 +9,8 @@ const options = {
 const where = document.getElementById('where');
 const form = document.getElementById('form');
 const results = document.getElementById('results');
+const locationBtn = document.getElementById('location');
+const compassIcon = document.getElementById('compass');
 
 // Use the input value to search for location in database
 async function getLocationInput(e) {
@@ -37,7 +39,7 @@ async function getLocationInput(e) {
             alert('Houston, mamy problem!', err);
         }
     } else {
-        alert('Proszę podać miejscowość...');
+        alert('Podaj miejscowość, proszę...');
     }
         
         
@@ -56,6 +58,42 @@ async function searchRestaurants(entity_id, entity_type) {
     
 };
 
+// Get the location of user using HTML Geolaction API
+
+function getUserLocation() {
+
+    //Function used when user's location is retrieved
+    async function success(position) {
+        const lat = position.coords.latitude;
+        const long = position.coords.longitude;
+        try {
+            compassIcon.classList.add('rotate');
+            const res = await fetch(`https://developers.zomato.com/api/v2.1/geocode?lat=${lat}&lon=${long}`, options);
+            const data = await res.json();
+            compassIcon.classList.remove('rotate');
+            // Fill the input with user's location name
+            where.value = data.location.city_name;
+            // Focus on the input
+            where.focus();
+        } catch (err) {
+            alert('Houston, mamy problem!', err);
+        }   
+    }
+
+    //Function used when error occurs while retrieving user location
+    function error() {
+        results.innerHTML = 'Nie udało nam się pobrać Twojej lokalizacji, spróbuj ponownie.';
+    }
+    //Check if Geoloaction is supported by the browser
+    if(!navigator.geolocation) {
+        results.innerHTML = 'Twoja przeglądarka nie obsługuje geolokalizacji.'; 
+    } else {
+        
+        navigator.geolocation.getCurrentPosition(success, error);
+    }
+};
+
+// Display found restaurants in UI
 function renderRestaurantsList(arr) {
     results.innerHTML = arr.map(el => {
         return `
@@ -74,4 +112,5 @@ function renderRestaurantsList(arr) {
 
 //Event listeners
 where.addEventListener('focusout', e => e.target.value = '');
-form.addEventListener('submit', getLocationInput);
+form.addEventListener('keypress', getLocationInput);
+locationBtn.addEventListener('click', getUserLocation);
