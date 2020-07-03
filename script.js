@@ -10,6 +10,7 @@ const form = document.getElementById('form');
 const results = document.getElementById('results');
 const locationBtn = document.getElementById('location');
 const compassIcon = document.getElementById('compass');
+const pages = document.getElementById('pages');
 
 // Use the input value to search for location in database
 async function getLocationInput(e) {
@@ -27,6 +28,7 @@ async function getLocationInput(e) {
             const res = await fetch(`https://developers.zomato.com/api/v2.1/locations?query=${location}`, options);
             const data = await res.json();
             console.log(data);
+
             // If there is a match for the city entered by user
             if(data.location_suggestions.length > 0 && data.location_suggestions.length < 2) {
                 const { entity_type, entity_id } = data.location_suggestions[0];
@@ -37,18 +39,21 @@ async function getLocationInput(e) {
         } catch(err) {
             alert('Houston, mamy problem!', err);
         }
+        
+    // If no input was provided
     } else {
         alert('Podaj miejscowość, proszę...');
     }        
 };
 
 // Search for restaurants in specified city
-async function searchRestaurants(entity_id, entity_type) {
+async function searchRestaurants(entity_id, entity_type, start=0, count=20) {
     try {
-        const res = await fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=${entity_id}&entity_type=${entity_type}`, options);
+        const res = await fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=${entity_id}&entity_type=${entity_type}&count=${count}&start=${start}`, options);
         const data = await res.json();
         console.log(data);
         renderRestaurantsList(data.restaurants);
+        renderPaginationButtons(data, entity_id, entity_type);
     } catch(err) {
         alert('Houston, mamy problem!', err);
     }
@@ -99,14 +104,32 @@ function renderRestaurantsList(arr) {
             ${el.restaurant.thumb !== '' ? `<img src="${el.restaurant.thumb} alt="Restaurant image" class="results__img">` : ''}
             <div class="results__location">${el.restaurant.location.city}, ${el.restaurant.location.locality}</div>
             <div class="results__price">Średnia cena dla dwojga: <span>${el.restaurant.average_cost_for_two}${el.restaurant.currency}</span></div>
-            <div class="results__more">
-                <p>Kliknij po więcej szczegółów!</p>
-            </div>
+            <p class="results__more">Kliknij po więcej szczegółów!</p>
         </div>`
     }).join('');
-}
+};
+
+async function renderMoreResults(e) {
+    const entity_id = e.target.dataset.entity_id;
+    const entity_type = e.target.dataset.entity_type;
+    const start = e.target.dataset.start;
+
+    if(e.target.tagName === 'BUTTON') {
+        searchRestaurants(entity_id, entity_type, start);
+    }
+};
+
+function renderPaginationButtons(data, entity_id, entity_type) {
+    pages.innerHTML = `
+
+    ${data.results_start > 0 ? `<button class="btn btn-prev" data-start=${data.results_start-20} data-entity_id=${entity_id} data-entity_type=${entity_type}>Prev</button>` : ''} 
+
+    ${data.results_found > 20 ? `<button class="btn btn-next" data-start=${data.results_start+20} data-entity_id=${entity_id} data-entity_type=${entity_type}>Next</button>` : ''} 
+    `;  
+};
 
 //Event listeners
 where.addEventListener('focusout', e => e.target.value = '');
 form.addEventListener('submit', getLocationInput);
 locationBtn.addEventListener('click', getUserLocation);
+pages.addEventListener('click', renderMoreResults);
