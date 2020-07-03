@@ -144,6 +144,7 @@ body {
     display: grid;
     width: 80%;
     grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+    gap: 2rem;
     margin-top: 5rem;
 }
 
@@ -154,12 +155,15 @@ body {
     cursor: pointer;
     text-align: center;
     align-items: center;
+    align-self: center;
+    justify-self: center;
     padding: 2rem 4rem 2rem 4rem;
-    margin: 3rem;
+    /* margin: 3rem; */
     border: 2px solid #fff;
     border-radius: 7px;
     box-shadow: 0 2px 1.5rem rgba(255, 255, 255, .8);
     transition: all .2s;
+    
 }
 
 .results__restaurant:hover {
@@ -193,11 +197,11 @@ body {
     border-radius: 50%;
     font-size: 2.25rem;
     font-family: 'Bangers', cursive;
-    transform: rotate(25deg);
+    transform: rotate(20deg);
 }
 
 .results__price span {
-    font-size: 2.25rem;
+    font-size: 2.5rem;
     font-weight: 700;
     /* font-family: 'Bangers', cursive ;
     letter-spacing: 3px;
@@ -207,9 +211,14 @@ body {
 .results__more {
     font-style: italic;
     font-size: 1.3rem;
-    margin-top: auto;
+    margin-top: 2.5rem;
 }
 
+.results__img {
+    margin-bottom: 1rem;
+}
+
+/* Animation of compass icon */
 .fas.fa-compass.rotate {
     animation: compassRotate 2s infinite;
 }

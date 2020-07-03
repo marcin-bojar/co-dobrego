@@ -1,4 +1,3 @@
-//zomato API key 4c1ca49f67fc297d5954541a5b8819d0
 const options = {
     headers: {
         'Accept': 'application/json',
@@ -40,9 +39,7 @@ async function getLocationInput(e) {
         }
     } else {
         alert('Podaj miejscowość, proszę...');
-    }
-        
-        
+    }        
 };
 
 // Search for restaurants in specified city
@@ -59,7 +56,6 @@ async function searchRestaurants(entity_id, entity_type) {
 };
 
 // Get the location of user using HTML Geolaction API
-
 function getUserLocation() {
 
     //Function used when user's location is retrieved
@@ -88,7 +84,6 @@ function getUserLocation() {
     if(!navigator.geolocation) {
         results.innerHTML = 'Twoja przeglądarka nie obsługuje geolokalizacji.'; 
     } else {
-        
         navigator.geolocation.getCurrentPosition(success, error);
     }
 };
@@ -101,6 +96,7 @@ function renderRestaurantsList(arr) {
             <div class="results__rate">${el.restaurant.user_rating.aggregate_rating}</div>
             <h2 class="heading-2">${el.restaurant.name}</h2>
             <h3 class="heading-3">${el.restaurant.cuisines}</h3>
+            ${el.restaurant.thumb !== '' ? `<img src="${el.restaurant.thumb} alt="Restaurant image" class="results__img">` : ''}
             <div class="results__location">${el.restaurant.location.city}, ${el.restaurant.location.locality}</div>
             <div class="results__price">Średnia cena dla dwojga: <span>${el.restaurant.average_cost_for_two}${el.restaurant.currency}</span></div>
             <div class="results__more">
@@ -112,5 +108,5 @@ function renderRestaurantsList(arr) {
 
 //Event listeners
 where.addEventListener('focusout', e => e.target.value = '');
-form.addEventListener('keypress', getLocationInput);
+form.addEventListener('submit', getLocationInput);
 locationBtn.addEventListener('click', getUserLocation);
