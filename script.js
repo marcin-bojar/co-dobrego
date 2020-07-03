@@ -2,7 +2,7 @@
 const options = {
     headers: {
         'Accept': 'application/json',
-        'user-key': '4c1ca49f67fc297d5954541a5b8819d0'
+        'user-key': '4c1ca49f67fc297d5954541a5b8819d0',
     }
 };
 
@@ -50,8 +50,14 @@ function renderRestaurantsList(arr) {
     results.innerHTML = arr.map(el => {
         return `
         <div class="results__restaurant">
-            <h2>${el.restaurant.name}</h2>
-            <h3>${el.restaurant.cuisines}</h3>
+            <div class="results__rate">${el.restaurant.user_rating.aggregate_rating}</div>
+            <h2 class="heading-2">${el.restaurant.name}</h2>
+            <h3 class="heading-3">${el.restaurant.cuisines}</h3>
+            <div class="results__location">${el.restaurant.location.city}, ${el.restaurant.location.locality}</div>
+            <div class="results__price">Średnia cena dla dwojga: <span>${el.restaurant.average_cost_for_two}${el.restaurant.currency}</span></div>
+            <div class="results__more">
+                <p>Kliknij po więcej szczegółów!</p>
+            </div>
         </div>`
     }).join('');
 }

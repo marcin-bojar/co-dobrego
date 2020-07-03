@@ -2,6 +2,8 @@
 :root {
     --color-grey-light: #999;
     --color-grey-dark: #333;
+    --color-primary: #e14bff;
+    --color-orange: #e4610a;
 }
 
 /* General */
@@ -45,20 +47,29 @@ body {
     margin-bottom: 10rem;
 }
 
+.heading-1,
+.heading-2 {
+    font-family: 'Bangers', cursive;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
 .heading-1 {
     font-size: 20rem;
-    font-weight: 300;
     letter-spacing: 1rem;
-    font-family: 'Bangers', cursive;
-    text-transform: uppercase;
-    color: #e14bff;
-    text-shadow: 9px 2px 0 #e4610a;
+    text-shadow: 9px 2px 0 var(--color-orange); 
 }
 
 .heading-2 {
-    font-size: 4rem;
-    font-weight: 300;
+    font-size: 3rem;
     letter-spacing: 1px;
+    margin-bottom: 1rem;
+    transition: transform .2s;
+}
+
+.heading-3 {
+    margin-bottom: 2.5rem;
 }
 
 /* Search form */
@@ -120,7 +131,7 @@ body {
     align-self: stretch;
     font-size: 2.2rem;
     padding: 0 1.6rem;
-    background-color: #e14bff;
+    background-color: var(--color-primary);
     border: 1px solid var(--color-grey-dark);
     transition: background-color .2s;
 }
@@ -132,17 +143,68 @@ body {
 .results {
     display: grid;
     width: 80%;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
     margin-top: 5rem;
 }
 
 .results__restaurant {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
     align-items: center;
-    padding: 2rem 5rem 2rem 5rem;
+    padding: 2rem 4rem 2rem 4rem;
     margin: 3rem;
     border: 2px solid #fff;
     border-radius: 7px;
+    box-shadow: 0 2px 1.5rem rgba(255, 255, 255, .8);
+    transition: all .2s;
+}
+
+.results__restaurant:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 2rem rgba(255, 255, 255, .8); 
+}
+
+.results__restaurant:hover > .heading-2 {
+    transform: scale(1.2);
+}
+
+
+.results__location {
+    color: var(--color-orange);
+    font-size: 1.8rem;
+    font-style: italic;
+    margin-bottom: 2rem;
+}
+
+.results__rate {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem;
+    top: -2rem;
+    right: -2rem;
+    height: 4rem;
+    width: 4rem;
+    background-color: var(--color-orange);
+    border-radius: 50%;
+    font-size: 2.25rem;
+    font-family: 'Bangers', cursive;
+    transform: rotate(25deg);
+}
+
+.results__price span {
+    font-size: 2.25rem;
+    font-weight: 700;
+    /* font-family: 'Bangers', cursive ;
+    letter-spacing: 3px;
+    color: var(--color-orange); */
+}
+
+.results__more {
+    font-style: italic;
+    font-size: 1.3rem;
 }
