@@ -11,7 +11,7 @@ const form = document.getElementById('form');
 const results = document.getElementById('results');
 
 // Use the input value to search for location in database
-async function getLocation(e) {
+async function getLocationInput(e) {
     e.preventDefault();
 
     //Clear previous results
@@ -22,28 +22,38 @@ async function getLocation(e) {
 
     //Check input
     if(location) {
-        const res = await fetch(`https://developers.zomato.com/api/v2.1/locations?query=${location}
-        `, options);
-        const data = await res.json();
-        console.log(data);
-        if(data.location_suggestions.length > 0 && data.location_suggestions.length < 2) {
-            const { entity_type, entity_id } = data.location_suggestions[0];
-            searchRestaurants(entity_id, entity_type);
-        } else {
-            results.innerHTML = 'Tego miasta nie ma w naszej bazie danych, przepraszamy';
-        }    
+        try {
+            const res = await fetch(`https://developers.zomato.com/api/v2.1/locations?query=${location}`, options);
+            const data = await res.json();
+            console.log(data);
+            // If there is a match for the city entered by user
+            if(data.location_suggestions.length > 0 && data.location_suggestions.length < 2) {
+                const { entity_type, entity_id } = data.location_suggestions[0];
+                searchRestaurants(entity_id, entity_type);
+            } else {
+                results.innerHTML = 'Tego miasta nie ma w naszej bazie danych, przepraszamy';
+            }    
+        } catch(err) {
+            alert('Houston, mamy problem!', err);
+        }
     } else {
         alert('Proszę podać miejscowość...');
     }
-    
+        
+        
 };
 
 // Search for restaurants in specified city
 async function searchRestaurants(entity_id, entity_type) {
-    const res = await fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=${entity_id}&entity_type=${entity_type}`, options);
-    const data = await res.json();
-    console.log(data);
-    renderRestaurantsList(data.restaurants);
+    try {
+        const res = await fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=${entity_id}&entity_type=${entity_type}`, options);
+        const data = await res.json();
+        console.log(data);
+        renderRestaurantsList(data.restaurants);
+    } catch(err) {
+        alert('Houston, mamy problem!', err);
+    }
+    
 };
 
 function renderRestaurantsList(arr) {
@@ -64,4 +74,4 @@ function renderRestaurantsList(arr) {
 
 //Event listeners
 where.addEventListener('focusout', e => e.target.value = '');
-form.addEventListener('submit', getLocation);
+form.addEventListener('submit', getLocationInput);

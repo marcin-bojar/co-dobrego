@@ -207,4 +207,5 @@ body {
 .results__more {
     font-style: italic;
     font-size: 1.3rem;
+    margin-top: auto;
 }
