@@ -223,10 +223,15 @@ body {
 
 .pagination {
     display: flex;
-    margin-top: 3rem;
-    width: 25rem;
+    margin-top: 5rem;
+    width: 40rem;
     max-width: 50rem;
     justify-content: center;
+}
+
+.btn-next,
+.btn-prev {
+    width: 15rem;
 }
 
 .btn-prev {

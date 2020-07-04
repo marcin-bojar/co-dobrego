@@ -120,12 +120,16 @@ async function renderMoreResults(e) {
 };
 
 function renderPaginationButtons(data, entity_id, entity_type) {
+    if (data.results_found > 20) {
     pages.innerHTML = `
+    
+    ${data.results_start > 0 ? `<button class="btn btn-prev" data-start=${data.results_start-20} data-entity_id=${entity_id} data-entity_type=${entity_type}>Poprzednia</button>` : ''} 
 
-    ${data.results_start > 0 ? `<button class="btn btn-prev" data-start=${data.results_start-20} data-entity_id=${entity_id} data-entity_type=${entity_type}>Prev</button>` : ''} 
-
-    ${data.results_found > 20 ? `<button class="btn btn-next" data-start=${data.results_start+20} data-entity_id=${entity_id} data-entity_type=${entity_type}>Next</button>` : ''} 
+    ${data.results_start < 80 ? `<button class="btn btn-next" data-start=${data.results_start+20} data-entity_id=${entity_id} data-entity_type=${entity_type}>Następna</button>` : ''} 
     `;  
+    } else {
+        pages.innerHTML = '';  
+    }
 };
 
 //Event listeners
