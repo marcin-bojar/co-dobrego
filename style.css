@@ -178,6 +178,17 @@ body {
     transform: scale(1.2);
 }
 
+.results__city {
+    text-align: center;
+    cursor: pointer;
+    width: 55%;
+    margin: 0 auto;
+}
+
+.results__error {
+    text-align: center;
+    font-size: 2.75rem;
+}
 
 .results__location {
     color: var(--color-orange);

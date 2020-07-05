@@ -1,4 +1,4 @@
-import { options, elements } from './base.js';
+import { elements } from './base.js';
 
 import Search from './models/search.js';
 import { getUserLocation } from './models/geolocation.js';
@@ -14,7 +14,7 @@ const state = {};
 
 const searchCtrl = async (id=null, type=null, start=null) => {
 
-    //If parameters are provided then pagination button was clicked so...
+    //If parameters are provided then pagination button was clicked or city has been selected from list so...
     if(id !== null && type !== null && start !== null) {
         // ...search for another set of restaurants ('start' is responsible for the first item in the list)...
         await state.search.searchRestaurants(id, type, start);
@@ -27,6 +27,9 @@ const searchCtrl = async (id=null, type=null, start=null) => {
 
     // If no parameters were provided then search form was submitted
     } else {
+        // Hide pagination buttons
+        searchView.hidePaginationButtons();
+        
         //Clear previous results
         searchView.clearResults();
         
@@ -59,7 +62,7 @@ const searchCtrl = async (id=null, type=null, start=null) => {
 
             // If there is no match for the city entered by user
             } else {
-                searchView.renderErrorMsg('Tego miasta nie ma w naszej bazie danych, przepraszamy');
+                searchView.renderErrorMsg('Tego miasta nie ma w naszej bazie danych, przepraszamy...');
             }   
         // If no input was provided
         } else {
@@ -85,6 +88,14 @@ elements.pages.addEventListener('click', e => {
         searchCtrl(entity_id, entity_type, start);
     }
     
+});
+
+elements.results.addEventListener('click', e => {
+    
+    if(e.target.closest('div').dataset.id) {
+        const cityID = e.target.closest('div').dataset.id;
+        searchCtrl(cityID, 'city', 0);
+    }
 });
 
 

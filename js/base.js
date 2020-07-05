@@ -12,4 +12,4 @@ export const elements = {
     locationBtn: document.getElementById('location'),
     compassIcon: document.getElementById('compass'),
     pages: document.getElementById('pages')
-}
+};
