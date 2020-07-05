@@ -41,29 +41,36 @@ const searchCtrl = async (id=null, type=null, start=null) => {
             // Update the state object
             state.search = new Search(query);
     
-            // Search for cities 
-            await state.search.searchForLocations();
+            // Search for cities
+            try {
+                await state.search.searchForLocations();
+        
+                // If there are multipule matches for the city name entered by user show all possibilities
+                if(state.search.cityMatches && state.search.cityMatches.length > 1) {
+                    // Display found cities
+                    searchView.renderCityResults(state.search.cityMatches);
+        
+                // If only one city matches the user's input then search for the restaurants in this city at once...
+                } else if (state.search.cityMatches.length === 1) {
+                    const cityID = state.search.cityMatches[0].id;
+                    await state.search.searchRestaurants(cityID);
+                   
+                    // ...and display them in UI...
+                    searchView.renderRestaurantsList(state.search.searchDetails.restaurants);
     
-            // If there are multipule matches for the city name entered by user show all possibilities
-            if(state.search.cityMatches && state.search.cityMatches.length > 1) {
-                // Display found cities
-                searchView.renderCityResults(state.search.cityMatches);
+                    // ...along with pagination buttons if needed
+                    searchView.renderPaginationButtons(state.search.searchDetails, cityID);
     
-            // If only one city matches the user's input then search for the restaurants in this city at once...
-            } else if (state.search.cityMatches.length === 1) {
-                const cityID = state.search.cityMatches[0].id;
-                await state.search.searchRestaurants(cityID);
-               
-                // ...and display them in UI...
-                searchView.renderRestaurantsList(state.search.searchDetails.restaurants);
-
-                // ...along with pagination buttons if needed
-                searchView.renderPaginationButtons(state.search.searchDetails, cityID)
-
-            // If there is no match for the city entered by user
-            } else {
-                searchView.renderErrorMsg('Tego miasta nie ma w naszej bazie danych, przepraszamy...');
-            }   
+                    console.log(state);
+    
+                // If there is no match for the city entered by user
+                } else {
+                    searchView.renderErrorMsg('Tego miasta nie ma w naszej bazie danych, przepraszamy...');
+                }   
+            }catch (err) {
+                alert('Houston, mamy problem!' + ' ' + err);
+            }
+            
         // If no input was provided
         } else {
             state.search = null;

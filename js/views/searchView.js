@@ -2,7 +2,7 @@ import { elements } from '../base.js';
 
 export const clearResults = () => elements.results.innerHTML = '';
 
-export const getInput = () => elements.where.value.trim();
+export const getInput = () => elements.where.value.trim().toLowerCase();
 
 export const setInput = (str) => elements.where.value = str;
 

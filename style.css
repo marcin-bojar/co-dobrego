@@ -67,7 +67,7 @@ body {
 
 .heading-1 {
     font-size: 20rem;
-    letter-spacing: 1rem;
+    letter-spacing: 1.3rem;
     text-shadow: 9px 2px 0 var(--color-orange); 
 }
 
@@ -182,7 +182,7 @@ body {
     text-align: center;
     cursor: pointer;
     width: 55%;
-    margin: 0 auto;
+    margin: 1.5rem auto;
 }
 
 .results__error {
@@ -236,6 +236,7 @@ body {
     display: flex;
     margin-top: 5rem;
     width: 40rem;
+    max-width: 90%;
     max-width: 50rem;
     justify-content: center;
 }
