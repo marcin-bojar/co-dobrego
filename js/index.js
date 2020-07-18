@@ -20,11 +20,15 @@ const searchCtrl = async (id=null, type=null, start=null) => {
         //Display loader...
         searchView.renderLoader();
 
+        // Scroll to the top of results
+        elements.title.scrollIntoView();
+
         // ...search for (another) set of restaurants ('start' is responsible for the first item in the list)...
         await state.search.searchRestaurants(id, type, start);
 
         //...hide loader
         searchView.hideLoader();
+        
 
         // ...display them in UI...
         searchView.renderRestaurantsList(state.search.searchDetails.restaurants);
@@ -69,7 +73,7 @@ const searchCtrl = async (id=null, type=null, start=null) => {
                     const cityID = state.search.cityMatches[0].id;
                     await state.search.searchRestaurants(cityID);
 
-                    //(hide loader meanwhile)
+                    // (hide loader meanwhile)
                     searchView.hideLoader();
                    
                     // ...and display them in UI...
@@ -77,6 +81,9 @@ const searchCtrl = async (id=null, type=null, start=null) => {
     
                     // ...along with pagination buttons if needed
                     searchView.renderPaginationButtons(state.search.searchDetails, cityID);
+
+                    // Scroll to the top of results
+                    elements.title.scrollIntoView();
     
                     // console.log(state);
     

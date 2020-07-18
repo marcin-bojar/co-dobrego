@@ -15,6 +15,7 @@
 
 html {
     font-size: 62.5%;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -159,6 +160,8 @@ body {
     width: 80%;
     grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
     gap: 3rem;
+
+    transition: filter .5s;
 }
 
 .results__restaurant {
