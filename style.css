@@ -144,12 +144,21 @@ body {
     color: #000;
 }
 
+.results-title {
+    margin: 5rem 0 10rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.city-title {
+    color: var(--color-orange);
+}
+
 .results {
     display: grid;
     width: 80%;
     grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
     gap: 3rem;
-    margin-top: 5rem;
 }
 
 .results__restaurant {
@@ -250,6 +259,40 @@ body {
     margin-right: auto;
 }
 
+/* Loader */
+.loader {
+    position: fixed;
+    display: flex;
+    bottom: 4.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+}
+
+.loader.shown {
+    opacity: 1;
+}
+
+.circle {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    margin: 1rem;
+    background-color: #fff;
+}
+
+.circle:nth-child(1) {
+    animation: loading .6s infinite;
+}
+
+.circle:nth-child(2) {
+    animation: loading .6s infinite .1s;
+}
+
+.circle:nth-child(3) {
+    animation: loading .6s infinite .2s;
+}
+
 
 /* Animation of the compass icon */
 .fas.fa-compass.rotate {
@@ -279,5 +322,17 @@ body {
 
     100% {
         transform: rotate(-22deg);
+    }
+}
+
+@keyframes loading {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-1.5rem);
+        background-color: var(--color-orange);
     }
 }

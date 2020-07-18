@@ -8,8 +8,10 @@ export const options = {
 export const elements = {
     where: document.getElementById('where'),
     form: document.getElementById('form'),
+    title: document.getElementById('results-title'),
     results: document.getElementById('results'),
     locationBtn: document.getElementById('location'),
     compassIcon: document.getElementById('compass'),
-    pages: document.getElementById('pages')
+    pages: document.getElementById('pages'),
+    loader: document.getElementById('loader')
 };

@@ -1,6 +1,9 @@
 import { elements } from '../base.js';
 
-export const clearResults = () => elements.results.innerHTML = '';
+export const clearResults = () => {
+     elements.results.innerHTML = '';
+     elements.title.innerHTML = '';
+}
 
 export const getInput = () => elements.where.value.trim().toLowerCase();
 
@@ -20,6 +23,7 @@ export const renderCityResults = (arr) => {
 
 // Display the list of restaurants in UI
 export const renderRestaurantsList = (arr) => {
+    elements.title.innerHTML = `<h2>Restauracje w mieście <span class="city-title"> ${arr[0].restaurant.location.city} </span></h2>`;
     elements.results.innerHTML = arr.map(el => {
         return `
         <div class="results__restaurant">
@@ -47,6 +51,9 @@ export const renderPaginationButtons = (data, entity_id, entity_type='city') => 
         elements.pages.innerHTML = '';  
     }
 };
+
+export const renderLoader = () => elements.loader.classList.add('shown');
+export const hideLoader = () => elements.loader.classList.remove('shown');
 
 export const hidePaginationButtons = () => elements.pages.innerHTML = '';
 

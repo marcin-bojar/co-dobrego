@@ -16,8 +16,15 @@ const searchCtrl = async (id=null, type=null, start=null) => {
 
     //If parameters are provided then pagination button was clicked or city has been selected from list so...
     if(id !== null && type !== null && start !== null) {
-        // ...search for another set of restaurants ('start' is responsible for the first item in the list)...
+
+        //Display loader...
+        searchView.renderLoader();
+
+        // ...search for (another) set of restaurants ('start' is responsible for the first item in the list)...
         await state.search.searchRestaurants(id, type, start);
+
+        //...hide loader
+        searchView.hideLoader();
 
         // ...display them in UI...
         searchView.renderRestaurantsList(state.search.searchDetails.restaurants);
@@ -32,6 +39,9 @@ const searchCtrl = async (id=null, type=null, start=null) => {
         
         //Clear previous results
         searchView.clearResults();
+
+        //Display loader
+        searchView.renderLoader();
         
         //Get the location query from input
         const query = searchView.getInput();
@@ -47,6 +57,10 @@ const searchCtrl = async (id=null, type=null, start=null) => {
         
                 // If there are multipule matches for the city name entered by user show all possibilities
                 if(state.search.cityMatches && state.search.cityMatches.length > 1) {
+                    
+                    //Hide loader
+                    searchView.hideLoader();
+
                     // Display found cities
                     searchView.renderCityResults(state.search.cityMatches);
         
@@ -54,6 +68,9 @@ const searchCtrl = async (id=null, type=null, start=null) => {
                 } else if (state.search.cityMatches.length === 1) {
                     const cityID = state.search.cityMatches[0].id;
                     await state.search.searchRestaurants(cityID);
+
+                    //(hide loader meanwhile)
+                    searchView.hideLoader();
                    
                     // ...and display them in UI...
                     searchView.renderRestaurantsList(state.search.searchDetails.restaurants);
@@ -61,7 +78,7 @@ const searchCtrl = async (id=null, type=null, start=null) => {
                     // ...along with pagination buttons if needed
                     searchView.renderPaginationButtons(state.search.searchDetails, cityID);
     
-                    console.log(state);
+                    // console.log(state);
     
                 // If there is no match for the city entered by user
                 } else {
