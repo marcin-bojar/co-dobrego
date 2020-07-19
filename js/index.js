@@ -171,10 +171,15 @@ const restaurantCtrl = (e) => {
 
 // Restaurant event listeners
 
+//Close the restaurant details popup with the 'x' icon
 elements.restaurantDetails.addEventListener('click', e => {
-    if(e.target.className !== 'restaurant-details__info')
+    if(e.target.className === 'restaurant-details__close')
         restaurantView.hideRestaurantDetails();
+});
 
+// Close the restaurant details popup by clicking anywhere outside it
+elements.overlay.addEventListener('click', () => {
+    restaurantView.hideRestaurantDetails();
 });
 
 

@@ -15,6 +15,7 @@ export const elements = {
     pages: document.getElementById('pages'),
     loader: document.getElementById('loader'),
     restaurant: document.querySelector('.results__restuarant'),
-    restaurantDetails: document.querySelector('.restaurant-details'),
-    closeRestaurantDetails: document.querySelector('.restaurant-details__close')
+    restaurantDetails: document.getElementById('restaurant-details'),
+    closeRestaurantDetails: document.querySelector('.restaurant-details__close'),
+    overlay: document.getElementById('overlay')
 };

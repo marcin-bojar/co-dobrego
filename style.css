@@ -104,6 +104,7 @@ body {
     left: 3rem;
     transform: translateY(-50%);
     transition: all .3s;
+    pointer-events: none;
 }
 .search__input {
     padding: 1rem 3rem;
@@ -298,26 +299,29 @@ body {
 
 .restaurant-details {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: scale(0) translate(-50%, -50%);
+    width: 124rem;
+    max-width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 2rem;
     color: var(--color-orange);
-    backdrop-filter: blur(3px) brightness(20%);
-    visibility: hidden;
-    transform: scale(0);
     opacity: 0;
-    transition: transform .5s;
+    z-index: 10;
+    transition: transform .5s, opacity .7s;
+}
+
+.restaurant-details.active {
+    opacity: 1;
+    transform: scale(1) translate(-50%, -50%);
 }
 
 .restaurant-details__info {
     position: relative;
-    max-width: 124rem;
     background-color: #000;
     border: 4px solid #fff;
     padding: 3rem;
@@ -381,6 +385,24 @@ body {
 .restaurant-details__item {
     margin: 2rem;
     text-align: center;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0, .8);
+    opacity: 0;
+    z-index: 9;
+    pointer-events: none;
+    transition: opacity .7s;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: all;
 }
 
 
