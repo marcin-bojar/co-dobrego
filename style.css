@@ -146,7 +146,7 @@ body {
 }
 
 .results-title {
-    margin: 5rem 0 10rem;
+    margin: 5rem 0 7rem;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -296,6 +296,72 @@ body {
     animation: loading .6s infinite .2s;
 }
 
+.restaurant-details {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: #000;
+    backdrop-filter: blur(3px) brightness(60%);
+    visibility: hidden;
+    transform: scale(0);
+    opacity: 0;
+    transition: all .5s;
+}
+
+.restaurant-details__info {
+    position: relative;
+    max-width: 120rem;
+    background-color: #fff;
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.restaurant-details__close {
+    position: absolute;
+    top: .5rem;
+    right: .5rem; 
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;  
+    font-size: 2.5rem;
+    color: var(--color-orange);
+    border-radius: 50%;
+    background-color: #000;
+}
+
+.restaurant-details__highlights {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 2rem;
+}
+
+.restaurant-details__highlight {
+    background-color: var(--color-orange);
+    padding: 1rem 2rem;
+    margin: 1rem;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 1.4rem;
+}
+
 
 /* Animation of the compass icon */
 .fas.fa-compass.rotate {
@@ -328,6 +394,7 @@ body {
     }
 }
 
+/* Animation for loader */
 @keyframes loading {
     0%,
     100% {

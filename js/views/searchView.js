@@ -24,16 +24,16 @@ export const renderCityResults = (arr) => {
 // Display the list of restaurants in UI
 export const renderRestaurantsList = (arr) => {
     elements.title.innerHTML = `<h2>Restauracje w mieście <span class="city-title"> ${arr[0].restaurant.location.city} </span></h2>`;
-    elements.results.innerHTML = arr.map(el => {
+    elements.results.innerHTML = arr.map((el, i) => {
         return `
-        <div class="results__restaurant">
-            <div class="results__rate">${el.restaurant.user_rating.aggregate_rating}</div>
+        <div class="results__restaurant" data-index=${i}>
+            <p class="results__rate">${el.restaurant.user_rating.aggregate_rating}</p>
             <h2 class="heading-2">${el.restaurant.name}</h2>
             <h3 class="heading-3">${el.restaurant.cuisines}</h3>
             ${el.restaurant.thumb !== '' ? `<img src="${el.restaurant.thumb} alt="Restaurant image" class="results__img">` : ''}
-            <div class="results__location">${el.restaurant.location.city}, ${el.restaurant.location.locality}</div>
-            <div class="results__price">Średnia cena dla dwojga: <span>${el.restaurant.average_cost_for_two}${el.restaurant.currency}</span></div>
-            <p class="results__more">Kliknij po więcej szczegółów!</p>
+            <p class="results__location">${el.restaurant.location.city}, ${el.restaurant.location.locality}</p>
+            <p class="results__price">Średnia cena dla dwojga: <span>${el.restaurant.average_cost_for_two}${el.restaurant.currency}</span></p>
+            <small class="results__more">Kliknij po więcej szczegółów!</small>
         </div>`
     }).join('');
 };

@@ -1,9 +1,11 @@
 import { elements } from './base.js';
 
-import Search from './models/search.js';
-import { getUserLocation } from './models/geolocation.js';
+import Search from './models/Search.js';
+import Restaurant from './models/Restaurant.js';
+import { getUserLocation } from './models/Geolocation.js';
 
 import * as searchView from './views/searchView.js';
+import * as restaurantView from './views/restaurantView.js';
 
 // State object
 const state = {};
@@ -20,17 +22,17 @@ const searchCtrl = async (id=null, type=null, start=null) => {
         //Display loader...
         searchView.renderLoader();
 
-        // Scroll to the top of results
+        // ...scroll to the top of results...
         elements.title.scrollIntoView();
 
         // ...search for (another) set of restaurants ('start' is responsible for the first item in the list)...
         await state.search.searchRestaurants(id, type, start);
 
-        //...hide loader
+        //...hide loader...
         searchView.hideLoader();
         
 
-        // ...display them in UI...
+        // ...display restaurants in UI...
         searchView.renderRestaurantsList(state.search.searchDetails.restaurants);
 
         // ...and display pagination buttons if needed
@@ -90,6 +92,7 @@ const searchCtrl = async (id=null, type=null, start=null) => {
                 // If there is no match for the city entered by user
                 } else {
                     searchView.renderErrorMsg('Tego miasta nie ma w naszej bazie danych, przepraszamy...');
+                    searchView.hideLoader();
                 }   
             }catch (err) {
                 alert('Houston, mamy problem!' + ' ' + err);
@@ -99,17 +102,24 @@ const searchCtrl = async (id=null, type=null, start=null) => {
         } else {
             state.search = null;
             alert('Podaj miejscowość, proszę...');
+            searchView.hideLoader();
         }
 
     }
 };
 
 // Search event listeners
+
+//Handle sumbit event on search form
 elements.form.addEventListener('submit', e => {
     e.preventDefault();
     searchCtrl();
 });
+
+// Clear the input when focused out
 elements.where.addEventListener('focusout', e => e.target.value = '');
+
+// Handle click event on pagination buttons
 elements.pages.addEventListener('click', e => {
     const entity_id = e.target.dataset.entity_id;
     const entity_type = e.target.dataset.entity_type;
@@ -121,14 +131,51 @@ elements.pages.addEventListener('click', e => {
     
 });
 
+// Handle click event on item in city results list
 elements.results.addEventListener('click', e => {
     
-    if(e.target.closest('div').dataset.id) {
+    if(e.target.closest('div').className === 'results__city') {
         const cityID = e.target.closest('div').dataset.id;
         searchCtrl(cityID, 'city', 0);
     }
+
+    // Handle click event on item in restaurants list
+    if(e.target.closest('div').className === 'results__restaurant') {
+        restaurantCtrl(e);
+    }
 });
 
+/////////////////////////////
+// Restaurant Controller //
+///////////////////////////
+
+const restaurantCtrl = (e) => {
+    // Get the index of the restaurant in results' array in search object
+    const index = +e.target.closest('div').dataset.index;
+    
+    // Create new resutaurant object
+    const restaurant = new Restaurant(index);
+
+    // Get restaurant data from state object
+    restaurant.getRestaurantDetails(state);
+
+    // Add it to state object
+    state.restaurant = restaurant;
+
+    // Retrieve the position of mouse in the moment when click happened
+    const {x, y} = restaurant.getMousePosition(e);
+
+    restaurantView.renderRestaurantDetails(x, y, restaurant);
+
+};
+
+// Restaurant event listeners
+
+elements.restaurantDetails.addEventListener('click', e => {
+    if(e.target.className !== 'restaurant-details__info')
+        restaurantView.hideRestaurantDetails();
+
+});
 
 
 /////////////////////////////
@@ -143,5 +190,3 @@ const geoCtrl = () => {
 
 // Geolocation event listeners
 elements.locationBtn.addEventListener('click', geoCtrl);
-
-
