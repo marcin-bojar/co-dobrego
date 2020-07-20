@@ -56,7 +56,10 @@ const searchCtrl = async (id=null, type=null, start=null) => {
         if(query) {
             // Update the state object
             state.search = new Search(query);
-    
+
+            // Parse the query in search object
+            state.search.parseQuery();
+
             // Search for cities
             try {
                 await state.search.searchForLocations();
@@ -96,6 +99,7 @@ const searchCtrl = async (id=null, type=null, start=null) => {
                 }   
             }catch (err) {
                 alert('Houston, mamy problem!' + ' ' + err);
+                searchView.hideLoader();
             }
             
         // If no input was provided

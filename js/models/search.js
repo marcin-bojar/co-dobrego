@@ -29,4 +29,11 @@ export default class Search {
         }
         
     };
+
+    // Parse the user's input
+    parseQuery() {
+        if(this.query === 'warszawa') {
+            this.query = 'warsaw';
+        }
+    }
 };
