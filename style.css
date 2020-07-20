@@ -232,7 +232,7 @@ body {
     right: -2rem;
     height: 4rem;
     width: 4rem;
-    background-color: var(--color-orange);
+    /* background-color: var(--color-orange); */
     border-radius: 50%;
     font-size: 2.25rem;
     font-family: 'Bangers', cursive;

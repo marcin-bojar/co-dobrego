@@ -169,6 +169,7 @@ const restaurantCtrl = (e) => {
     // Retrieve the position of mouse in the moment when click happened
     const {x, y} = restaurant.getMousePosition(e);
 
+    // Display restaurants details in UI
     restaurantView.renderRestaurantDetails(x, y, restaurant);
 
 };

@@ -27,7 +27,7 @@ export const renderRestaurantsList = (arr) => {
     elements.results.innerHTML = arr.map((el, i) => {
         return `
         <div class="results__restaurant" data-index=${i}>
-            <p class="results__rate">${el.restaurant.user_rating.aggregate_rating}</p>
+            <p class="results__rate" style="background-color:#${el.restaurant.user_rating.rating_color};">${el.restaurant.user_rating.aggregate_rating}</p>
             <h2 class="heading-2">${el.restaurant.name}</h2>
             <h3 class="heading-3">${el.restaurant.cuisines}</h3>
             ${el.restaurant.thumb !== '' ? `<img src="${el.restaurant.thumb} alt="Restaurant image" class="results__img">` : ''}
