@@ -83,6 +83,18 @@ body {
     margin-bottom: 2.5rem;
 }
 
+.zomato {
+    display: block;
+    margin-top: -2rem;
+}
+
+.zomato-link:link,
+.zomato-link:visited {
+    text-decoration: none;
+    color: #CB202D;
+
+}
+
 /* Search form */
 .form-group {
     display: flex;
