@@ -35,5 +35,8 @@ export default class Search {
         if(this.query === 'warszawa') {
             this.query = 'warsaw';
         }
+        if(this.query === 'waszyngton') {
+            this.query = 'washington';
+        }
     }
 };

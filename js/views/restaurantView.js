@@ -104,7 +104,7 @@ const translateRestaurantHighlightsToPolish = highlight => {
             return 'Mastercard';
         case 'vegan options':
             return 'Vegan';
-        case 'Kosher':
+        case 'kosher':
             return 'Dania koszerne';
         case 'table booking recommended':
             return 'Zalecana rezerwacja';
@@ -116,6 +116,8 @@ const translateRestaurantHighlightsToPolish = highlight => {
             return 'Gwiazdka Michelin';
         case 'private dining area available':
             return 'Dostępna strefa prywatna';
+        case 'dance floor':
+            return 'Parkiet taneczny';
         
         default:
             return highlight;

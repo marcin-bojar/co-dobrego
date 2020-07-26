@@ -12,6 +12,7 @@ export default class Restaurant {
         this.location = restaurant.location;
         this.highlights = restaurant.highlights;
         this.name = restaurant.name;
+        this.cuisines = restaurant.cuisines;
         this.phone_numbers = restaurant.phone_numbers;
         this.timings = restaurant.timings;
         this.user_rating = restaurant.user_rating;

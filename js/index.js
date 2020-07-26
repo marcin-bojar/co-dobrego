@@ -149,6 +149,8 @@ elements.results.addEventListener('click', e => {
     }
 });
 
+
+
 /////////////////////////////
 // Restaurant Controller //
 ///////////////////////////
@@ -166,7 +168,7 @@ const restaurantCtrl = (e) => {
     // Add it to state object
     state.restaurant = restaurant;
 
-    // Retrieve the position of mouse in the moment when click happened
+    // Retrieve the position of mouse in the moment when click happened (used as transform origin of restaurant details popup animation)
     const {x, y} = restaurant.getMousePosition(e);
 
     // Display restaurants details in UI
@@ -186,6 +188,8 @@ elements.restaurantDetails.addEventListener('click', e => {
 elements.overlay.addEventListener('click', () => {
     restaurantView.hideRestaurantDetails();
 });
+
+
 
 
 /////////////////////////////

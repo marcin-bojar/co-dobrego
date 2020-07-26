@@ -29,7 +29,7 @@ export const renderRestaurantsList = (arr) => {
         <div class="results__restaurant" data-index=${i}>
             <p class="results__rate" style="background-color:#${el.restaurant.user_rating.rating_color};">${el.restaurant.user_rating.aggregate_rating}</p>
             <h2 class="heading-2">${el.restaurant.name}</h2>
-            <h3 class="heading-3">${el.restaurant.cuisines}</h3>
+            <h3 class="heading-3">${translateCuisinesToPolish(el.restaurant.cuisines)}</h3>
             ${el.restaurant.thumb !== '' ? `<img src="${el.restaurant.thumb} alt="Restaurant image" class="results__img">` : ''}
             <p class="results__location">${el.restaurant.location.city}, ${el.restaurant.location.locality}</p>
             <p class="results__price">Średnia cena dla dwojga: <span>${el.restaurant.average_cost_for_two}${el.restaurant.currency}</span></p>
@@ -50,6 +50,118 @@ export const renderPaginationButtons = (data, entity_id, entity_type='city') => 
     } else {
         elements.pages.innerHTML = '';  
     }
+};
+
+const translateCuisinesToPolish = cuisines => {
+    // Cuisines comes from API as a string so first converting it into array
+    const cuisinesArr = cuisines.split(',');
+    
+    return cuisinesArr.map(el => {
+        switch(el.toLowerCase().trim()) {
+            case 'polish':
+                return 'Polska';
+            case 'hungarian':
+                return 'Węgierska';
+            case 'italian':
+                return 'Włoska';
+            case 'international':
+                return 'Międzynarodowa';
+            case 'japanese':
+                return 'Japońska';
+            case 'healthy food':
+                return 'Zdrowe jedzenie';
+            case 'french':
+                return 'Francuska';
+            case 'asian':
+                return 'Azjatycka';
+            case 'mediterranean':
+                return 'Śródziemnomorska';
+            case 'desserts':
+                return 'Desery';
+            case 'indian':
+                return 'Indyjska';
+            case 'american':
+                return 'Amerykańska';
+            case 'burger':
+                return 'Burgery';
+            case 'steak':
+                return 'Steki';
+            case 'austrian':
+                return 'Austryjacka';
+            case 'tea':
+                return 'Herbata';
+            case 'cafe':
+                return 'Kawa';
+            case 'european':
+                return 'Europejska';
+            case 'german':
+                return 'Niemiecka';
+            case 'mexican':
+                return 'Meksykańska';
+            case 'bakery':
+                return 'Piekarnia';
+            case 'thai':
+                return 'Tajska';
+            case 'georgian':
+                return 'Gruzińska';
+            case 'chinese':
+                return 'Chińska';
+            case 'seafood':
+                return 'Owoce morza';
+            case 'southern':
+                return 'Południowa';
+            case 'belgian':
+                return 'Belgijska';
+            case 'ukrainian':
+                return 'Ukraińska';
+            case 'moroccan':
+                return 'Marokańska';
+            case 'middle eastern':
+                return 'Bliskowschodnia';
+            case 'bagels':
+                return 'Bajgle';
+            case 'latin american':
+                return 'Latynoamerykańska';
+            case 'cuban':
+                return 'Kubańska';
+            case 'juices':
+                return 'Soki';
+            case 'beverages':
+                return 'Napoje';
+            case 'venezuelan':
+                return 'Wenezuelska';
+            case 'sandwich':
+                return 'Kanapki';
+            case 'british':
+                return 'Brytyjska';
+            case 'spanish':
+                return 'Hiszpańska';
+            case 'breakfast':
+                return 'Śniadania';
+            case 'turkish':
+                return 'Turecka';
+            case 'vegetarian':
+                return 'Wegetariańska';
+            case 'greek':
+                return 'Grecka';
+            case 'brazilian':
+                return 'Brazylijska';
+            case 'jamaican':
+                return 'Jamajska';
+            case 'coffee and tea':
+                return 'Kawa i Herbata';
+            case 'portuguese':
+                return 'Portugalska';
+            case 'african' :
+                return 'Afrykańska';
+            case 'caribbean':
+                return 'Karaibska';          
+            
+            default:
+                return el;
+        }
+    }).join(', ');
+
 };
 
 export const renderLoader = () => elements.loader.classList.add('shown');
