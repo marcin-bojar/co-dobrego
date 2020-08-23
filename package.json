@@ -12,12 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marcin-bojar/co-dobrego.git"
+    "url": "https://github.com/marcin-bojar/co-dobrego.git"
   },
   "author": "Marcin Bojar",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/marcin-bojar/co-dobrego/issues"
   },
-  "homepage": "https://marcin-bojar.hithub.io/co-dobrego"
+  "homepage": "https://marcin-bojar.github.io/co-dobrego"
 }
