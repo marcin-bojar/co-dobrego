@@ -1,0 +1,469 @@
+/* Variables */
+:root {
+  --color-grey-light: #999;
+  --color-grey-dark: #333;
+  --color-primary: #e14bff;
+  --color-orange: #e4610a;
+}
+
+/* General */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(./vendors/img/bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  /* background-color: #23646d; */
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.6rem;
+  padding: 2rem;
+}
+
+/* Button general style */
+.btn {
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--color-primary);
+  padding: 0.75rem 2.5rem;
+  border: 1px solid var(--color-grey-dark);
+  color: #fff;
+  text-transform: uppercase;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  background-color: #c73de2;
+}
+
+/* Typography */
+.header {
+  text-align: center;
+  margin-bottom: 10rem;
+}
+
+.heading-1,
+.heading-2 {
+  font-family: 'Bangers', cursive;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.heading-1 {
+  font-size: 20rem;
+  letter-spacing: 1.3rem;
+  text-shadow: 9px 2px 0 var(--color-orange);
+}
+
+.heading-2 {
+  font-size: 3rem;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  transition: transform 0.2s;
+}
+
+.heading-3 {
+  margin-bottom: 2.5rem;
+}
+
+.zomato {
+  display: block;
+  margin-top: -2rem;
+}
+
+.zomato-link:link,
+.zomato-link:visited {
+  text-decoration: none;
+  color: #cb202d;
+}
+
+/* Search form */
+.form-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search {
+  position: relative;
+}
+
+.search__label {
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--color-grey-light);
+  cursor: text;
+  position: absolute;
+  top: 50%;
+  left: 3rem;
+  transform: translateY(-50%);
+  transition: all 0.3s;
+  pointer-events: none;
+}
+.search__input {
+  padding: 1rem 3rem;
+  font-family: inherit;
+  font-size: 2rem;
+  width: 75vw;
+  max-width: 60rem;
+  border-radius: 5px;
+  border: 1px solid var(--color-grey-dark);
+}
+
+.search__input:focus,
+.btn:focus {
+  outline: none;
+}
+
+.search__input:focus + .search__label {
+  transform: translateY(-210%);
+  color: #fff;
+}
+
+.search__input::placeholder {
+  opacity: 0;
+  color: var(--color-grey-light);
+  font-size: 2rem;
+  font-weight: 300;
+  transition: opacity 0.3s;
+}
+
+.search__input:focus.search__input::placeholder {
+  opacity: 1;
+}
+
+.search__btn {
+  margin-left: 2rem;
+  align-self: stretch;
+  font-size: 2.2rem;
+  padding: 0 1.6rem;
+  color: #000;
+}
+
+.results-title {
+  margin: 5rem 0 7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.city-title {
+  color: var(--color-orange);
+}
+
+.results {
+  display: grid;
+  width: 80%;
+  grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+  gap: 3rem;
+
+  transition: filter 0.5s, opacity 1.5s;
+}
+
+.results.fetching {
+  opacity: 0;
+}
+.results__restaurant {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+  align-items: center;
+  /* align-self: center;
+    justify-self: center; */
+  padding: 2rem 4rem 2rem 4rem;
+  border: 2px solid #fff;
+  border-radius: 7px;
+  box-shadow: 0 2px 1.5rem rgba(255, 255, 255, 0.8);
+  transition: all 0.2s;
+}
+
+.results__restaurant:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 2rem rgba(255, 255, 255, 0.8);
+}
+
+.results__restaurant:hover > .heading-2 {
+  transform: scale(1.2);
+}
+
+.results__city {
+  text-align: center;
+  cursor: pointer;
+  width: 55%;
+  margin: 1.5rem auto;
+}
+
+.results__error {
+  text-align: center;
+  font-size: 2.75rem;
+}
+
+.results__location {
+  color: var(--color-orange);
+  font-size: 1.8rem;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.results__rate {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem;
+  top: -2rem;
+  right: -2rem;
+  height: 4rem;
+  width: 4rem;
+  /* background-color: var(--color-orange); */
+  border-radius: 50%;
+  font-size: 2.25rem;
+  font-family: 'Bangers', cursive;
+  transform: rotate(20deg);
+}
+
+.results__price span {
+  font-size: 2.5rem;
+  font-weight: 700;
+  /* font-family: 'Bangers', cursive ;
+    letter-spacing: 3px;
+    color: var(--color-orange); */
+}
+
+.results__more {
+  font-style: italic;
+  font-size: 1.3rem;
+  margin-top: 2.5rem;
+}
+
+.results__img {
+  margin-bottom: 1rem;
+}
+
+.pagination {
+  display: flex;
+  margin-top: 5rem;
+  width: 40rem;
+  max-width: 90%;
+  max-width: 50rem;
+  justify-content: center;
+}
+
+.btn-next,
+.btn-prev {
+  width: 15rem;
+}
+
+.btn-prev {
+  margin-right: auto;
+}
+
+/* Loader */
+.loader {
+  position: fixed;
+  display: flex;
+  bottom: 4.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+}
+
+.loader.shown {
+  opacity: 1;
+}
+
+.circle {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  margin: 1rem;
+  background-color: #fff;
+}
+
+.circle:nth-child(1) {
+  animation: loading 0.6s infinite;
+}
+
+.circle:nth-child(2) {
+  animation: loading 0.6s infinite 0.1s;
+}
+
+.circle:nth-child(3) {
+  animation: loading 0.6s infinite 0.2s;
+}
+
+.restaurant-details {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: scale(0) translate(-50%, -50%);
+  width: 124rem;
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: var(--color-orange);
+  opacity: 0;
+  z-index: 10;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.restaurant-details.active {
+  opacity: 1;
+  transform: scale(1) translate(-50%, -50%);
+}
+
+.restaurant-details.hide {
+  opacity: 0;
+}
+
+.restaurant-details__info {
+  position: relative;
+  width: 100%;
+  background-image: radial-gradient(circle at 50%, #050505, #000);
+  border: 4px solid #fff;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.restaurant-details__info .heading-2 {
+  font-size: 7rem;
+}
+
+.restaurant-details__info .heading-3 {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.restaurant-details__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 2.5rem;
+  color: #fff;
+  border-radius: 50%;
+  background-color: var(--color-orange);
+}
+
+.restaurant-details__highlights {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem;
+}
+
+.restaurant-details__highlight {
+  background-color: #fff;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  font-weight: bolder;
+}
+
+.restaurant-details__list {
+  list-style: none;
+}
+
+.restaurant-details__item {
+  margin: 2rem;
+  text-align: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  z-index: 9;
+  pointer-events: none;
+  transition: opacity 0.7s;
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Animation of the compass icon */
+.fas.fa-compass.rotate {
+  animation: compassRotate 2s infinite;
+}
+
+@keyframes compassRotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  20% {
+    transform: rotate(115deg);
+  }
+
+  45% {
+    transform: rotate(65deg);
+  }
+
+  60% {
+    transform: rotate(-15deg);
+  }
+
+  85% {
+    transform: rotate(30deg);
+  }
+
+  100% {
+    transform: rotate(-22deg);
+  }
+}
+
+/* Animation for loader */
+@keyframes loading {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-1.5rem);
+    background-color: var(--color-orange);
+  }
+}
